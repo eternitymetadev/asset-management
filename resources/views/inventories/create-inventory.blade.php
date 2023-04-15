@@ -9,7 +9,6 @@ Create Inventory
 @endsection
 
 
-
 @section("wrapper")
 <div class="page-wrapper">
     <div class="page-content">
