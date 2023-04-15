@@ -177,7 +177,7 @@ class InventoryController extends Controller
 
                         $un_id = InventoryInvoice::select('un_id')->latest('un_id')->first();
                         if (empty($un_id) || $un_id == null) {
-                            $un_id = 00001;
+                            $un_id = 100001;
                         } else {
                             $un_id = $un_id['un_id'] + 1;
                         }

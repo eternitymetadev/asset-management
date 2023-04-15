@@ -27,12 +27,16 @@ class GlobalFunctions
         }
         return $status;
     }
-    public static function AssignedStatus($status)
+    public static function AssetInvcStatus($status)
     {
-        if ($status == 1) {
-            $status = 'Assigned';
-        } else if ($status == 2) {
+        if ($status == 0) {
+            $status = 'Cancel';
+        } else if ($status == 1) {
             $status = 'Unassigned';
+        }else if ($status == 2) {
+            $status = 'Assigned';
+        } else if ($status == 3) {
+            $status = 'Scrapped';
         }
         return $status;
     }

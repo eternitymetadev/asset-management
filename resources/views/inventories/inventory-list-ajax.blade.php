@@ -13,14 +13,14 @@
                 <th>Invoice No</th>
                 <th>Invoice Date</th>
                 <th>Invoice Price</th>
-                <!-- <th>No of item Invoice</th> -->
+                <th>Status</th>
             </tr>
         </thead>
         <tbody id="accordion" class="accordion">
             @if(count($inventories)>0)
             @foreach($inventories as $value)
             <tr>
-                <td>{{ $value->un_id ?? "-" }}</td>
+                <td>FRC-{{ $value->un_id ?? "-" }}</td>
                 <td>{{ $value->sno ?? "-" }}</td>
                 <td>{{ $value->Category->name ?? "-" }}</td>
                 <td>{{ $value->brand_id ?? "-" }}</td>
@@ -31,7 +31,7 @@
                 <td>{{ $value->Inventories->invoice_no ?? "-" }}</td>
                 <td>{{ Helper::ShowDayMonthYear($value->Inventories->invoice_date) ?? "-" }}</td>
                 <td>{{ $value->Inventories->invoice_price ?? "-" }}</td>
-                <!-- <td>{{ $value->no_of_invc ?? "-" }}</td> -->
+                <td>{{ Helper::AssetInvcStatus($value->status) ?? "-" }}</td>
 
             </tr>
             @endforeach
