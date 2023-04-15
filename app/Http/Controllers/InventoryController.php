@@ -166,6 +166,11 @@ class InventoryController extends Controller
                     $get_data = $request->data;
                     foreach ($get_data as $key => $save_data) {
                         $save_invc['inventory_id'] = $saveinventory->id;
+                        $save_invc['sno'] = $save_data['sno'];
+                        $save_invc['category_id'] = $save_data['category_id'];
+                        $save_invc['brand_id'] = $save_data['brand_id'];
+                        $save_invc['model'] = $save_data['model'];
+                        $save_invc['unit_price'] = $save_data['unit_price'];
                         $save_invc['status'] = 1;
 
                         if($save_data['invc_image']){
