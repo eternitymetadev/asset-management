@@ -2,36 +2,17 @@
     <table class="table mb-3" style="width:100%">
         <thead>
             <tr>
-                <th>UN ID</th>
-                <th>Sr No</th>
-                <th>Category</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Unit Price</th>
-                <th>Bill TO Unit</th>
-                <th>Vendor</th>
-                <th>Invoice No</th>
-                <th>Invoice Date</th>
-                <th>Invoice Price</th>
-                <th>Status</th>
+                <th>ID</th>
+                <th>Name</th>
             </tr>
         </thead>
         <tbody id="accordion" class="accordion">
-            @if(count($inventories)>0)
-            @foreach($inventories as $value)
+            @if(count($brands)>0)
+            @foreach($brands as $value)
             <tr>
-                <td>FRC-{{ $value->un_id ?? "-" }}</td>
-                <td>{{ $value->sno ?? "-" }}</td>
-                <td>{{ $value->Category->name ?? "-" }}</td>
-                <td>{{ $value->Brand->name ?? "-" }}</td>
-                <td>{{ $value->model ?? "-" }} </td>
-                <td>{{ $value->unit_price ?? "-" }}</td>
-                <td>{{ $value->Inventories->Unit->name ?? "-" }}</td>
-                <td>{{ $value->Inventories->vendor_id ?? "-" }}</td>
-                <td>{{ $value->Inventories->invoice_no ?? "-" }}</td>
-                <td>{{ Helper::ShowDayMonthYear($value->Inventories->invoice_date) ?? "-" }}</td>
-                <td>{{ $value->Inventories->invoice_price ?? "-" }}</td>
-                <td>{{ Helper::AssetInvcStatus($value->status) ?? "-" }}</td>
+                <td>{{ $value->id ?? "-" }}</td>
+                <td>{{ ucwords($value->name) ?? "-" }}</td>
+                <!-- <td>{{ $value->status ?? "-" }}</td> -->
 
             </tr>
             @endforeach
@@ -66,7 +47,7 @@
     </div>
     <div class="ml-auto mr-auto">
         <nav class="navigati text-center" aria-label="Page navigation">
-            {{$inventories->appends(request()->query())->links()}}
+            {{$brands->appends(request()->query())->links()}}
         </nav>
     </div>
 </div>

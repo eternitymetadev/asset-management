@@ -1,6 +1,6 @@
 @extends("layouts.app")
 @section("pageTitle")
-Category List
+Brand List
 @endsection
 
 
@@ -23,16 +23,15 @@ Category List
                 </form>
             </div>
             <div class="ms-auto">
+                <a href="javascript:void(0)" class="btn btn-primary reset_filter"
+                    style="font-size: 15px; padding: 9px;" data-action="<?php echo url()->current(); ?>"><span><i class="fa fa-refresh"></i> Reset Filters</span></a>
                 <a class="btn btn-primary" style="font-size: 15px; padding: 9px; width: 130px"
-                    href="{{'settings/add-category'}}" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
+                    href="{{'settings/add-brand'}}" data-bs-toggle="modal" data-bs-target="#addBrandModal">
                     <span>
                         <i class="fa fa-plus"></i>
                         Add New
                     </span>
                 </a>
-                <a href="javascript:void(0)" class="btn btn-primary reset_filter"
-                    style="font-size: 15px; padding: 9px;" data-action="<?php echo url()->current(); ?>"><span><i
-                            class="fa fa-refresh"></i> Reset Filters</span></a>
             </div>
         </div>
 
@@ -43,7 +42,7 @@ Category List
                     <div class="card-body p-4">
 
                         <div class="main-table table-responsive">
-                            @include('settings.category-list-ajax')
+                            @include('settings.brand-list-ajax')
                         </div>
                     </div>
                 </div>
@@ -53,13 +52,13 @@ Category List
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
-        <form class="modal-content general_form" method="POST" action="{{url($prefix.'/settings/add-category')}}"
-            id="createcategory">
+        <form class="modal-content general_form" method="POST" action="{{url($prefix.'/settings/add-brand')}}"
+            id="createbrand">
             @csrf
             <div class="modal-header">
-                <h5 class="modal-title" id="addCategoryModalLabel">Create Category</h5>
+                <h5 class="modal-title" id="addBrandModalLabel">Create Brand</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

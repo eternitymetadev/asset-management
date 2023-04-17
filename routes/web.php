@@ -64,12 +64,15 @@ Route::group(['prefix'=>'admin', 'middleware'=>['auth','PermissionCheck']], func
 {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('inventories', InventoryController::class);
+    Route::get('inventories/export/excel', [InventoryController::class, 'inventoryExport']);
     Route::resource('users', UserController::class);
 
     Route::get('/settings/category', [SettingController::class, 'Category']);
     Route::post('/settings/add-category', [SettingController::class, 'addCategory']);
     Route::any('/settings/get-category', [SettingController::class, 'editCategory']);
     Route::any('/settings/delete-category', [SettingController::class, 'deleteCategory']);
+    Route::get('/settings/brand', [SettingController::class, 'Brand']);
+    Route::post('/settings/add-brand', [SettingController::class, 'addBrand']);
 
 });
 

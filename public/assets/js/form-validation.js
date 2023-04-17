@@ -96,7 +96,28 @@ jQuery(document).ready(function(){
             formSubmitRedirect(form);
         }
     });
-  /*===== End create role =====*/
+  /*===== End create category =====*/
+
+  /*===== create brand =====*/
+    jQuery('#createbrand').validate({
+        rules:
+        {
+            name: {
+            required: true,
+            },
+        },
+        messages:
+        {
+            name: {
+            required: "Enter brand"
+            },
+        },
+        submitHandler : function(form)
+        {
+            formSubmitRedirect(form);
+        }
+    });
+    /*===== End create brand =====*/
 
     jQuery('#add_role').click(function(){
         jQuery('#role_savebtn').text('Add');
@@ -431,6 +452,8 @@ function formSubmitRedirect(form)
             }else if(response.page == 'inventory-create' || response.page == 'inventory-update'){
                 setTimeout(() => {window.location.href = response.redirect_url},2000);
             }else if(response.page == 'category-create' || response.page == 'category-update'){
+                setTimeout(() => {window.location.href = response.redirect_url},2000);
+            }else if(response.page == 'brand-create' || response.page == 'brand-update'){
                 setTimeout(() => {window.location.href = response.redirect_url},2000);
             }
             

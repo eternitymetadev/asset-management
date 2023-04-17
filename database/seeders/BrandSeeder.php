@@ -17,13 +17,11 @@ class BrandSeeder extends Seeder
         $input = [
             [
                 'name' => 'Dell',
-                'added_date' => '',
                 'status' => 1,
                 'created_at' => time()
             ],
             [
                 'name' => 'Lenovo',
-                'added_date' => '',
                 'status' => 1,
                 'created_at' => time()
             ],

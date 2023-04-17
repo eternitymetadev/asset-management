@@ -19,4 +19,7 @@ class InventoryInvoice extends Model
     public function Category(){
         return $this->hasOne('App\Models\Category','id','category_id');
     }
+    public function Brand(){
+        return $this->hasOne('App\Models\Brand','id','brand_id');
+    }
 }

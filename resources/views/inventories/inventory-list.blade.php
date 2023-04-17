@@ -23,6 +23,9 @@ Inventory List
                 </form>
             </div>
             <div class="ms-auto">
+
+                <a href="<?php echo URL::to($prefix.'/'.$segment.'/export/excel'); ?>"
+                    class="btn btn-primary" download><span><i class="fa fa-download"></i> Export</span></a>
                 <a class="btn btn-primary" style="font-size: 15px; padding: 9px; width: 130px"
                     href="{{'inventories/create'}}">
                     <span>
@@ -30,6 +33,9 @@ Inventory List
                         Add New
                     </span>
                 </a>
+                <a href="javascript:void(0)" class="btn btn-primary reset_filter" style="font-size: 15px; padding: 9px;"
+                    data-action="<?php echo url()->current(); ?>"><span><i class="fa fa-refresh"></i> Reset
+                        Filters</span></a>
             </div>
         </div>
 
@@ -70,6 +76,47 @@ jQuery(function() {
         $(e.target).parents().off(evt)
         $(window).off(evt)
     })
+
 })
+
+// list export in excel 
+
+jQuery(document).on('click', '.inventoryListExs', function(event) {
+    event.preventDefault();
+
+    var totalcount = jQuery('.totalcount').text();
+    if (totalcount > 30000) {
+        jQuery('.limitmessage').show();
+        setTimeout(function() {
+            jQuery('.limitmessage').fadeOut();
+        }, 5000);
+        return false;
+    }
+
+    var url = jQuery(this).attr('data-action');
+alert(url);
+    jQuery.ajax({
+        url: url,
+        type: 'get',
+        cache: false,
+        data: '',
+        headers: {
+            'X-CSRF-TOKEN': jQuery('meta[name="_token"]').attr('content')
+        },
+        processData: true,
+        beforeSend: function() {
+            //jQuery(".load-main").show();
+        },
+        complete: function() {
+            //jQuery(".load-main").hide();
+        },
+        success: function(response) {
+            // jQuery(".load-main").hide();
+            setTimeout(() => {
+                window.location.href = geturl
+            }, 10);
+        }
+    });
+});
 </script>
 @endsection

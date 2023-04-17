@@ -1,17 +1,17 @@
 <!--sidebar wrapper -->
 <div class="sidebar-wrapper" data-simplebar="true">
-            <div class="sidebar-header">
-                <div>
-                    <img src="{{asset('assets/images/logo-icon.png')}}" class="logo-icon" alt="logo icon">
-                </div>
-                <div>
-                    <h4 class="logo-text">Rocker</h4>
-                </div>
-                <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
-                </div>
-            </div>
+    <div class="sidebar-header">
+        <div>
+            <img src="{{asset('assets/images/logo-icon.png')}}" class="logo-icon" alt="logo icon">
+        </div>
+        <div>
+            <h4 class="logo-text">Rocker</h4>
+        </div>
+        <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+        </div>
+    </div>
 
-            <?php
+    <?php
             $url = URL::to('/');
             $string = request()->route()->getPrefix();
             $getprefix = str_replace('/', '', $string);
@@ -22,56 +22,59 @@
             $submenusegment = Request::segment(3);
 
             ?>
-            
-            <!--navigation-->
-            <ul class="metismenu" id="menu">
-                <li>
-                    <a href="{{$prefixurl.'dashboard'}}" class="">
-                        <div class="parent-icon"><i class='bx bx-home-circle'></i>
-                        </div>
-                        <div class="menu-title">Dashboard</div>
-                    </a>
+
+    <!--navigation-->
+    <ul class="metismenu" id="menu">
+        <li>
+            <a href="{{$prefixurl.'dashboard'}}" class="">
+                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Inventories</div>
+            </a>
+            <ul>
+                <li> <a href="{{$prefixurl.'inventories'}}"><i class="bx bx-right-arrow-alt"></i>Inventory List</a>
                 </li>
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bx bx-category"></i>
-                        </div>
-                        <div class="menu-title">Inventories</div>
-                    </a>
-                    <ul>
-                        <li> <a href="{{$prefixurl.'inventories'}}"><i class="bx bx-right-arrow-alt"></i>Inventory List</a>
-                        </li>
-                        <li> <a href="{{$prefixurl.'inventories/create'}}"><i class="bx bx-right-arrow-alt"></i>Create Inventory</a>
-                        </li>
-                        
-                    </ul>
+                <li> <a href="{{$prefixurl.'inventories/create'}}"><i class="bx bx-right-arrow-alt"></i>Create
+                        Inventory</a>
                 </li>
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bx bx-category"></i>
-                        </div>
-                        <div class="menu-title">Users</div>
-                    </a>
-                    <ul>
-                        <li> <a href="{{$prefixurl.'users'}}"><i class="bx bx-right-arrow-alt"></i>User List</a>
-                        </li> 
-                        <li> <a href="{{$prefixurl.'users/create'}}"><i class="bx bx-right-arrow-alt"></i>Create User</a>
-                        </li>                       
-                    </ul>
+
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Users</div>
+            </a>
+            <ul>
+                <li> <a href="{{$prefixurl.'users'}}"><i class="bx bx-right-arrow-alt"></i>User List</a>
                 </li>
-                <li>
-                    <a href="javascript:;" class="has-arrow">
-                        <div class="parent-icon"><i class="bx bx-category"></i>
-                        </div>
-                        <div class="menu-title">Settings</div>
-                    </a>
-                    <ul>
-                        <li> <a href="{{$prefixurl.'settings/category'}}"><i class="bx bx-right-arrow-alt"></i>Category</a>
-                        </li>
-                        
-                    </ul>
+                <li> <a href="{{$prefixurl.'users/create'}}"><i class="bx bx-right-arrow-alt"></i>Create User</a>
                 </li>
-                <!-- <li class="menu-label">UI Elements</li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Settings</div>
+            </a>
+            <ul>
+                <li> <a href="{{$prefixurl.'settings/category'}}"><i class="bx bx-right-arrow-alt"></i>Category</a>
+                </li>
+                <li> <a href="{{$prefixurl.'settings/brand'}}"><i class="bx bx-right-arrow-alt"></i>Brand</a>
+                </li>
+
+            </ul>
+        </li>
+        <!-- <li class="menu-label">UI Elements</li>
                 <li>
                     <a href="{{ url('widgets') }}">
                         <div class="parent-icon"><i class='bx bx-cookie'></i>
@@ -139,7 +142,7 @@
                         </li>
                     </ul>
                 </li> -->
-                <!-- <li>
+        <!-- <li>
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><i class="bx bx-repeat"></i>
                         </div>
@@ -197,7 +200,7 @@
                         </li>
                     </ul>
                 </li> -->
-                <!-- <li>
+        <!-- <li>
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><i class="bx bx-grid-alt"></i>
                         </div>
@@ -248,7 +251,7 @@
                         <div class="menu-title">Timeline</div>
                     </a>
                 </li> -->
-                <!-- <li>
+        <!-- <li>
                     <a class="has-arrow" href="javascript:;">
                         <div class="parent-icon"><i class="bx bx-error"></i>
                         </div>
@@ -342,7 +345,7 @@
                         <div class="menu-title">Support</div>
                     </a>
                 </li> -->
-            </ul>
-            <!--end navigation-->
-        </div>
-        <!--end sidebar wrapper -->
+    </ul>
+    <!--end navigation-->
+</div>
+<!--end sidebar wrapper -->

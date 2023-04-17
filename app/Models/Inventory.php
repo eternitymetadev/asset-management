@@ -17,11 +17,6 @@ class Inventory extends Model
         return $this->hasMany('App\Models\InventoryInvoice','inventory_id','id');
     }
     
-    public function InventoryInvoice()
-    {
-        return $this->hasOne('App\Models\InventoryInvoice','inventory_id','id');
-    }
-
     public function Unit(){
         return $this->hasOne('App\Models\Unit','id','unit_id');
     }

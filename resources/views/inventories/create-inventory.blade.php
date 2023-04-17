@@ -41,54 +41,6 @@ Create Inventory
                             <?php $authuser = Auth::user(); ?>
 
                             <div class="card-title d-flex align-items-center">
-                                <span class="mb-0 subTitle">Item Purchase information</span>
-                            </div>
-                            <hr />
-                            <div class="col-md-4">
-                                <label for="" class="form-label">Bill to Unit</label>
-                                <select type="text" class="form-select" name="unit_id" id="">
-                                    <option value="">Choose...</option>
-                                    <?php 
-                                        if(count($units)>0) {
-                                            foreach ($units as $key => $value) {
-                                        ?>
-                                    <option value="{{ $key }}">{{ucwords($value)}}</option>
-                                    <?php 
-                                        }
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="" class="form-label">Vendor Name</label>
-                                <input type="text" class="form-control" name="vendor_id" id="">
-                            </div>
-                            <div class="col-md-4">
-                                <label for="" class="form-label">Invoice No</label>
-                                <input type="text" class="form-control" name="invoice_no" id="">
-                            </div>
-
-                            <div class="col-md-4">
-                                <label for="" class="form-label">Invoice Date</label>
-                                <input type="date" class="form-control" name="invoice_date" id="">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="" class="form-label">Invoice Price</label>
-                                <input type="text" class="form-control" name="invoice_price" id="">
-                            </div>
-                            <div class="col-md-3">
-                                <label for="" class="form-label">No of Items</label>
-                                <input type="text" class="form-control" name="invcitem_no" id="">
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="form-check">
-                                    <label class="form-label" for="">Invoice Image</label>
-                                    <input type="file" class="form-control invoice_image" name="invoice_image" accept="image/*">
-                                </div>
-                            </div>
-
-                            <div class="card-title d-flex align-items-center">
                                 <span class="mb-0 subTitle">Item Description</span>
                             </div>
                             <hr />
@@ -99,7 +51,7 @@ Create Inventory
                                         <tr>
                                             <th>Sr No.</th>
                                             <th style="width: 150px">Category</th>
-                                            <th>Brand</th>
+                                            <th style="width: 150px">Brand</th>
                                             <th>Model</th>
                                             <th>Unit Price</th>
                                             <th>Image</th>
@@ -125,11 +77,26 @@ Create Inventory
                                                     ?>
                                                 </select>
                                             </td>
-                                            <td><input class="form-control" name="data[0][brand_id]" /></td>
+                                            <td>
+                                                <select type="text" class="form-select" name="data[0][brand_id]">
+                                                    <option value="">Choose...</option>
+                                                    <?php 
+                                                    if(count($brands)>0) {
+                                                        foreach ($brands as $key => $value) {
+                                                    ?>
+                                                    <option value="{{ $key }}">{{ucwords($value)}}</option>
+                                                    <?php 
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </td>
                                             <td><input class="form-control" name="data[0][model]" /></td>
                                             <td><input class="form-control" name="data[0][unit_price]" /></td>
                                             <td>
-                                            <input type="file" class="form-control invoice_image" name="data[0][invc_image]" accept="image/*"></td>
+                                                <input type="file" class="form-control invoice_image"
+                                                    name="data[0][invc_image]" accept="image/*">
+                                            </td>
                                             <td></td>
                                         </tr>
                                     </tbody>
@@ -138,6 +105,55 @@ Create Inventory
 
                             <div class="col-12" style="text-align: right">
                                 <span id="add" onclick="appendItemRow()">Add Item</span>
+                            </div>
+
+                            <div class="card-title d-flex align-items-center">
+                                <span class="mb-0 subTitle">Item Purchase information</span>
+                            </div>
+                            <hr />
+                            <div class="col-md-3">
+                                <label for="" class="form-label">Bill to Unit</label>
+                                <select type="text" class="form-select" name="unit_id" id="">
+                                    <option value="">Choose...</option>
+                                    <?php 
+                                        if(count($units)>0) {
+                                            foreach ($units as $key => $value) {
+                                        ?>
+                                    <option value="{{ $key }}">{{ucwords($value)}}</option>
+                                    <?php 
+                                        }
+                                    }
+                                    ?>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="" class="form-label">Vendor Name</label>
+                                <input type="text" class="form-control" name="vendor_id" id="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="" class="form-label">Invoice No</label>
+                                <input type="text" class="form-control" name="invoice_no" id="">
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="" class="form-label">Invoice Date</label>
+                                <input type="date" class="form-control" name="invoice_date" id="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="" class="form-label">Invoice Price</label>
+                                <input type="text" class="form-control" name="invoice_price" id="">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="" class="form-label">No of Items</label>
+                                <input type="text" class="form-control" name="invcitem_no" id="">
+                            </div>
+
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <label class="form-label" for="">Invoice Image</label>
+                                    <input type="file" class="form-control invoice_image" name="invoice_image"
+                                        accept="image/*">
+                                </div>
                             </div>
 
 
@@ -161,15 +177,22 @@ Create Inventory
             let i = 1;
             node += `<tr>
                         <td><input class="form-control" name="data[` + i + `][sno]"/></td>
-                        <td><select type="text" class="form-select" name="data[` + i + `][category_id]"
-                                                    id="">
+                        <td><select type="text" class="form-select" name="data[` + i + `][category_id]">
                                                     <option value="">Choose...</option>
-                                                        @foreach ($categories as $key => $value) {
-                                                    ?>
+                                                    @if(count($categories)>0) 
+                                                        @foreach ($categories as $key => $value)
                                                     <option value="{{$key}}">{{ucwords($value)}}</option>
                                                     @endforeach
+                                                    @endif
                                                 </select></td>
-                        <td><input class="form-control" name="data[` + i + `][brand_id]"/></td>
+                        <td><select type="text" class="form-select" name="data[` + i + `][brand_id]">
+                                                    <option value="">Choose...</option>
+                                                    @if(count($brands)>0)
+                                                        @foreach ($brands as $key => $value)
+                                                    <option value="{{$key}}">{{ucwords($value)}}</option>
+                                                    @endforeach
+                                                    @endif
+                                                </select></td>
                         <td><input class="form-control" name="data[` + i + `][model]"/></td>
                         <td><input class="form-control" name="data[` + i + `][unit_price]"/></td>
                         <td><input type="file" class="form-control invoice_image" name="data[` + i + `][invc_image]" accept="image/*"></td>

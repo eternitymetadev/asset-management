@@ -3,13 +3,10 @@ namespace App\Helpers;
 
 use App\Models\Branch;
 use App\Models\Location;
-use App\Models\PrsDrivertask;
-use App\Models\RegionalClient;
 use App\Models\State;
-use App\Models\TransactionSheet;
-use App\Models\Vehicle;
 use App\Models\Category;
 use App\Models\Unit;
+use App\Models\Brand;
 use DB;
 use Image;
 use Storage;
@@ -67,8 +64,13 @@ class GlobalFunctions
 
     public static function getUnits()
     {
-        $categories = Unit::where('status', 1)->orderby('name', 'ASC')->pluck('name', 'id');
-        return $categories;
+        $units = Unit::where('status', 1)->orderby('name', 'ASC')->pluck('name', 'id');
+        return $units;
+    }
+    public static function getBrands()
+    {
+        $brands = Brand::where('status', 1)->orderby('name', 'ASC')->pluck('name', 'id');
+        return $brands;
     }
 
     public static function uploadImage($file, $path)

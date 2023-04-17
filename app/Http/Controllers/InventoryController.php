@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Models\InventoryHistory;
 use App\Models\InventoryInvoice;
 use App\Models\User;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\InventoryExport;
 use Validator;
 use Helper;
 use Config;
@@ -38,21 +40,32 @@ class InventoryController extends Controller
         $query = InventoryInvoice::query();
 
         if ($request->ajax()) {
-            $query = $query;
-
-            // if(isset($request->singleuser)){
-            //     Inventory::where('id',$request->assetid)->update(['assigned_to'=>$request->singleleaduser,'assigned_status'=>1]);
-            // }
+            if (isset($request->resetfilter)) {
+                Session::forget('peritem');
+                $url = URL::to($this->prefix . '/' . $this->segment);
+                return response()->json(['success' => true, 'redirect_url' => $url]);
+            }
 
             if (!empty($request->search)) {
                 $search = $request->search;
                 $searchT = str_replace("'", "", $search);
                 $query->where(function ($query) use ($search, $searchT) {
-                    $query->where('id', 'like', '%' . $search . '%')
-                    ->orWhere('name', 'like', '%' . $search . '%')
+                    $query->where('sno', 'like', '%' . $search . '%')
                     ->orWhere('model', 'like', '%' . $search . '%')
-                    ->orWhere('brand', 'like', '%' . $search . '%')
-                    ->orWhere('unit', 'like', '%' . $search . '%');
+                    ->orWhere('unit_price', 'like', '%' . $search . '%')
+                    ->orWhereHas('Category', function($categoryquery) use ($search){
+                        $categoryquery->where('name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('Brand', function($brandquery) use ($search){
+                        $brandquery->where('name', 'like', '%' . $search . '%');
+                    })
+                    ->orWhereHas('Inventories', function($inventoryquery) use ($search){
+                        $inventoryquery->where('invoice_no', 'like', '%' . $search . '%')
+                        ->orWhere('invoice_price', 'like', '%' . $search . '%')
+                        ->orWhereHas('Unit', function($unitquery) use ($search){
+                            $unitquery->where('name', 'like', '%' . $search . '%');
+                        });
+                    });
                         
                 });
             }
@@ -91,11 +104,11 @@ class InventoryController extends Controller
     public function create()
     {
         $this->prefix = request()->route()->getPrefix();
-        $locations = Helper::getLocations();
         $categories = Helper::getCategories();
         $units = Helper::getUnits();
+        $brands = Helper::getBrands();
 
-        return view('inventories.create-inventory', ['prefix' => $this->prefix, 'segment' => $this->segment, 'locations' => $locations, 'categories' => $categories,'units'=>$units]);
+        return view('inventories.create-inventory', ['prefix' => $this->prefix, 'segment' => $this->segment, 'brands' => $brands, 'categories' => $categories,'units'=>$units]);
     }
 
     /**
@@ -212,6 +225,10 @@ class InventoryController extends Controller
         return response()->json($response);
     }
 
+    public function inventoryExport()
+    {
+        return Excel::download(new InventoryExport, 'inventories.csv');
+    }
 
     /**
      * Display the specified resource.
