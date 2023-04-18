@@ -79,44 +79,5 @@ jQuery(function() {
 
 })
 
-// list export in excel 
-
-jQuery(document).on('click', '.inventoryListExs', function(event) {
-    event.preventDefault();
-
-    var totalcount = jQuery('.totalcount').text();
-    if (totalcount > 30000) {
-        jQuery('.limitmessage').show();
-        setTimeout(function() {
-            jQuery('.limitmessage').fadeOut();
-        }, 5000);
-        return false;
-    }
-
-    var url = jQuery(this).attr('data-action');
-alert(url);
-    jQuery.ajax({
-        url: url,
-        type: 'get',
-        cache: false,
-        data: '',
-        headers: {
-            'X-CSRF-TOKEN': jQuery('meta[name="_token"]').attr('content')
-        },
-        processData: true,
-        beforeSend: function() {
-            //jQuery(".load-main").show();
-        },
-        complete: function() {
-            //jQuery(".load-main").hide();
-        },
-        success: function(response) {
-            // jQuery(".load-main").hide();
-            setTimeout(() => {
-                window.location.href = geturl
-            }, 10);
-        }
-    });
-});
 </script>
 @endsection
