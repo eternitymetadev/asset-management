@@ -1,6 +1,6 @@
 @extends("layouts.app")
 @section("pageTitle")
-Category List
+User List
 @endsection
 
 
